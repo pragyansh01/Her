@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(to bottom,#fff0f3,#ffe4ec);
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:white;
+  padding:40px 30px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+  z-index:10;
+  max-width:360px;
+  animation:fadeIn 1s ease;
+}
+
+h1{
+  color:#d81b60;
+  font-size:26px;
+  margin-bottom:12px;
+}
+
+p{
+  font-size:15px;
+  color:#444;
+}
+
+.buttons{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+button{
+  padding:12px 26px;
+  font-size:16px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+}
+
+#yes{
+  background:#d81b60;
+  color:white;
+}
+
+#no{
+  background:#eee;
+  position:relative;
+}
+
+/* Roses */
+.rose{
+  position:absolute;
+  top:-50px;
+  font-size:24px;
+  animation:fall linear infinite;
+  opacity:.8;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Celebration */
+.celebrate{
+  display:none;
+  text-align:center;
+}
+
+.celebrate h2{
+  color:#d81b60;
+  font-size:28px;
+}
+
+.confetti{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background:red;
+  animation:confetti 1.5s linear infinite;
+}
+
+@keyframes confetti{
+  to{
+    transform:translateY(100vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.9)}
+  to{opacity:1; transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Will you be my Valentine? 💖</h1>
+  <p>Eshita Sharma 🌹</p>
+
+  <div class="buttons">
+    <button id="yes" onclick="yesClicked()">Yes 💕</button>
+    <button id="no" onmouseover="moveNo()">No 🙈</button>
+  </div>
+</div>
+
+<div class="celebrate" id="celebrate">
+  <h2>🎉 SHE SAID YES 🎉</h2>
+  <p>🍰💖🎆</p>
+</div>
+
+<script>
+// Falling roses
+for(let i=0;i<25;i++){
+  let rose=document.createElement("div");
+  rose.className="rose";
+  rose.innerHTML="🌹";
+  rose.style.left=Math.random()*100+"vw";
+  rose.style.animationDuration=3+Math.random()*5+"s";
+  document.body.appendChild(rose);
+}
+
+// No button run away
+function moveNo(){
+  const no=document.getElementById("no");
+  no.style.position="absolute";
+  no.style.left=Math.random()*70+"%";
+  no.style.top=Math.random()*70+"%";
+}
+
+// Yes clicked
+function yesClicked(){
+  document.getElementById("card").style.display="none";
+  document.getElementById("celebrate").style.display="block";
+
+  // Confetti
+  for(let i=0;i<60;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-10px";
+    c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(c);
+  }
+
+  // NOTIFICATION TO YOU
+  const message="💖 SHE SAID YES! 💖\n\nEshita Sharma accepted your Valentine proposal 🥹🌹";
+  window.open(
+    "https://wa.me/?text="+encodeURIComponent(message),
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>
